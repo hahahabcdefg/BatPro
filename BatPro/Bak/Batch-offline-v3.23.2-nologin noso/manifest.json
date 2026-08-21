@@ -1,0 +1,157 @@
+{
+  "manifest_version": 3,
+  "name": "多多开Pro",
+  "version": "3.23.2",
+  "description": "多多开电商智能运营工作台 - 不仅仅是多开，更是您的全能电商管家。支持多平台账号管理、智能批量开票、跨店订单聚合、数据导出等一站式运营功能，助您极速提升电商生产力。",
+  "permissions": [
+    "cookies",
+    "storage",
+    "tabs",
+    "downloads",
+    "declarativeNetRequest",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://*.yangkeduo.com/*",
+    "https://*.pinduoduo.com/*",
+    "https://yangkeduo.com/*",
+    "https://pinduoduo.com/*",
+    "https://*.pinduoduo.com/*",
+    "https://*.yangkeduo.com/*",
+    "https://*.taobao.com/*",
+    "https://*.tmall.com/*",
+    "https://taobao.com/*",
+    "https://tmall.com/*",
+    "https://*.1688.com/*",
+    "https://1688.com/*",
+    "https://*.goofish.com/*",
+    "https://goofish.com/*",
+    "https://*.meituan.com/*",
+    "https://meituan.com/*",
+    "https://*.jd.com/*",
+    "https://jd.com/*"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "block_duoduokai",
+        "enabled": true,
+        "path": "rules/block_duoduokai.json"
+      }
+    ]
+  },
+  "action": {
+    "default_title": "多多开电商智能运营工作台",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "/assets/icon16.png",
+      "32": "/assets/icon32.png",
+      "48": "/assets/icon48.png",
+      "128": "/assets/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/background.bundle.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mobile.pinduoduo.com/*",
+        "https://mobile.yangkeduo.com/*"
+      ],
+      "js": [
+        "content/pdd_inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mobile.pinduoduo.com/*",
+        "https://mobile.yangkeduo.com/*",
+        "https://*.taobao.com/*",
+        "https://*.tmall.com/*",
+        "https://taobao.com/*",
+        "https://tmall.com/*",
+        "https://*.1688.com/*",
+        "https://1688.com/*",
+        "https://*.goofish.com/*",
+        "https://goofish.com/*",
+        "https://*.meituan.com/*",
+        "https://meituan.com/*",
+        "https://*.jd.com/*",
+        "https://jd.com/*"
+      ],
+      "js": [
+        "background/utils/domain-utils.js",
+        "content/content.bundle.js",
+        "content/content-screenshot-mocker.js",
+        "content-scripts/nav-bar.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "https://jietu.duoduokai.shop/*"
+      ],
+      "js": [
+        "content/content-screenshot-mocker.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "/assets/icon16.png",
+    "32": "/assets/icon32.png",
+    "48": "/assets/icon48.png",
+    "128": "/assets/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/js/pdd/*"
+      ],
+      "matches": [
+        "https://mobile.pinduoduo.com/*",
+        "https://mobile.yangkeduo.com/*"
+      ]
+    },
+    {
+      "resources": [
+        "assets/*"
+      ],
+      "matches": [
+        "https://mobile.pinduoduo.com/*",
+        "https://mobile.yangkeduo.com/*"
+      ]
+    },
+    {
+      "resources": [
+        "dist-window/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "resources": [
+        "content/content-screenshot-mocker.js"
+      ],
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "https://jietu.duoduokai.shop/*"
+      ]
+    },
+    {
+      "resources": [
+        "assets/js/1688/send_message_to_shop.js"
+      ],
+      "matches": [
+        "*://air.1688.com/*"
+      ]
+    }
+  ]
+}

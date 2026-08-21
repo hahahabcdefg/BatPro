@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BatPro - 窗口导航</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Topbar样式 */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background-color: #fff;
+      border-bottom: 1px solid #f0f0f0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #1890ff;
+      background: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      color: #40a9ff;
+      background-color: #e6f7ff;
+    }
+
+    .nav-btn:disabled {
+      color: #bfbfbf;
+      cursor: not-allowed;
+    }
+
+    .topbar-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .close-btn {
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #999;
+      background: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #666;
+      background-color: #f5f5f5;
+    }
+
+    /* iframe样式 */
+    .content-wrapper {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      z-index: 10;
+    }
+
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #1890ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    .content-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* 图标样式 */
+    .icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .icon-back {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 18l-6-6 6-6'/%3E%3C/svg%3E");
+    }
+
+    .icon-forward {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+    }
+
+    .icon-close {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+      width: 18px;
+      height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-nav">
+      <button class="nav-btn" id="backBtn" disabled>
+        <span class="icon icon-back"></span>
+        <span>返回</span>
+      </button>
+      <button class="nav-btn" id="forwardBtn" disabled>
+        <span class="icon icon-forward"></span>
+        <span>前进</span>
+      </button>
+    </div>
+    <div class="topbar-title" id="pageTitle">订单详情</div>
+    <button class="close-btn" id="closeBtn">
+      <span class="icon icon-close"></span>
+    </button>
+  </div>
+
+  <!-- 内容区域 -->
+  <div class="content-wrapper">
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner"></div>
+      <span class="loading-text">加载中...</span>
+    </div>
+    <iframe id="contentIframe" class="content-iframe"></iframe>
+  </div>
+
+  <!-- 引用外部脚本 -->
+  <script src="window-nav.js"></script>
+</body>
+</html>

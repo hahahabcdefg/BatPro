@@ -1,0 +1,468 @@
+/* 登录界面样式 */
+.login-container {
+    padding: 16px 20px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.login-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.login-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.login-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 4px 0;
+    line-height: 1.4;
+}
+
+.login-subtitle {
+    font-size: 13px;
+    color: #888;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.login-form {
+    margin-bottom: 16px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    height: 40px;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.form-input:focus {
+    outline: none;
+    border: 1px solid var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(242, 34, 34, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-input::placeholder {
+    color: #bbb;
+}
+
+.form-options {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #666;
+}
+
+.checkbox-input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-text {
+    user-select: none;
+}
+
+.privacy-checkbox-label {
+    margin-top: 8px;
+    align-items: flex-start;
+}
+
+.privacy-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 2px;
+}
+
+.privacy-link:hover {
+    text-decoration: underline;
+    color: #e02020;
+}
+
+.privacy-error {
+    color: #dc3545 !important;
+}
+
+.privacy-error .privacy-link {
+    color: #dc3545 !important;
+}
+
+.form-actions {
+    margin-top: 24px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important; /* 禁用状态下不允许transform */
+}
+
+.btn-primary {
+    background: var(--gradient-primary) !important;
+    color: var(--white) !important;
+    box-shadow: var(--shadow-sm) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    font-size: 16px !important;
+    height: 44px !important; /* Make it taller */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    
+    /* Fix weird hover area and text display issues */
+    position: relative;
+    overflow: hidden; /* Ensure ::after does not overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary .btn-text {
+    color: var(--white) !important;
+    position: relative;
+    z-index: 2; /* Ensure text is above ::after overlay */
+    pointer-events: none; /* Let clicks pass through text to button */
+}
+
+/* Ensure hover state affects the whole button */
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+    filter: brightness(1.05); /* Make slightly brighter on hover */
+}
+
+/* Ensure active state works properly */
+.btn-primary:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: none !important;
+}
+
+/* Fix the overlay */
+.btn-primary:active:not(:disabled)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Below text */
+    pointer-events: none;
+    border-radius: inherit; /* Inherit border radius from button */
+}
+
+.btn.loading {
+    pointer-events: none;
+    user-select: none;
+    transform: none !important; /* 禁用loading状态下的hover效果 */
+    opacity: 0.8 !important; /* loading时不应该太淡 */
+}
+
+.btn.loading .btn-text {
+    opacity: 0;
+    display: none; /* 双重保险 */
+}
+
+.btn.loading .btn-loading {
+    opacity: 1;
+    display: flex !important; /* 确保显示 */
+    z-index: 10; /* 确保在最上层 */
+}
+
+.btn-link {
+    background: none;
+    color: var(--primary-color);
+    padding: 8px 16px;
+    width: auto;
+    box-shadow: none;
+    height: auto;
+}
+
+.btn-link:hover {
+    background: rgba(242, 34, 34, 0.05);
+    transform: none;
+}
+
+.btn-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.loading-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white !important;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    flex-shrink: 0; /* 防止spinner被压缩 */
+    margin-right: 8px; /* 为文本留出空间 */
+    display: block;
+}
+
+.loading-text {
+    font-size: 14px;
+    color: white !important;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.login-footer {
+    text-align: center;
+    padding-top: 16px;
+    margin-top: 8px;
+}
+
+.login-tips {
+    font-size: 12px;
+    color: #888;
+    margin: 0 0 8px 0;
+}
+
+/* 消息提示样式 */
+.message-toast {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 360px) {
+    .login-container {
+        padding: 16px;
+    }
+    
+    .login-title {
+        font-size: 18px;
+    }
+    
+    .form-input {
+        height: 36px;
+    }
+    
+    .btn {
+        height: 36px;
+    }
+}
+
+/* 错误状态 */
+.form-input.error {
+    border: 1px solid #dc3545 !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.error-message {
+    font-size: 12px;
+    color: #dc3545;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.error-message::before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    background: #dc3545;
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* 警告状态 */
+.form-input.warning {
+    border: 1px solid #faad14 !important;
+    box-shadow: 0 0 0 3px rgba(250, 173, 20, 0.1);
+}
+
+/* 成功状态 */
+.form-input.success {
+    border: 1px solid #28a745 !important;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* 验证码样式 */
+.captcha-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.captcha-input {
+    flex: 1;
+}
+
+.captcha-image {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#captcha-canvas {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+#captcha-canvas:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(242, 34, 34, 0.1);
+}
+
+/* =========================================
+   Binding Page Specific Styles
+   ========================================= */
+
+.binding-header {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 8px;
+}
+
+.binding-header .login-title {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.binding-header .login-subtitle {
+    font-size: 13px;
+    color: #888;
+}
+
+.binding-form .form-group {
+    margin-bottom: 12px;
+}
+
+.binding-form .form-input {
+    height: 36px;
+}
+
+.binding-form .btn {
+    height: 36px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #e0e0e0;
+    color: var(--primary-color);
+    width: auto;
+    padding: 0 12px;
+    height: 36px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    background: rgba(242, 34, 34, 0.05);
+    transform: translateY(-1px);
+}
+
+.btn-outline:active:not(:disabled) {
+    background: rgba(242, 34, 34, 0.1);
+    transform: translateY(0);
+}
+
+.btn-outline:disabled {
+    border-color: #f0f0f0;
+    color: #ccc;
+    background: #f9f9f9;
+}
+
+.btn-text {
+    background: transparent;
+    color: #999;
+    padding: 6px 12px;
+    width: auto;
+    height: auto;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.btn-text:hover {
+    color: #666;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
